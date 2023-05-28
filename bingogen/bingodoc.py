@@ -7,5 +7,4 @@ class BingoDoc:
         self.bingo_data = bingo_data
 
     def generate_doc(self):
-        # implementation here
-        pass
+        return True

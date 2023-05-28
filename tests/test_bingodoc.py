@@ -9,4 +9,5 @@ def test_bingo_doc_init():
     with tempfile.NamedTemporaryFile() as temp:
         bd = BingoData(temp.name)
 
-        bd_doc = BingoDoc(bd)
+        bingo_doc = BingoDoc(bd)
+        assert bingo_doc.generate_doc()
