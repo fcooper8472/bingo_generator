@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "bingogen"
 version = "0.1.0"
-description = "Generates randomised NxN bingo squares"
+description = "Generate randomised NxN bingo squares"
 authors = ["Fergus Cooper <fcooper8472@gmail.com>"]
 
 [tool.poetry.dependencies]
