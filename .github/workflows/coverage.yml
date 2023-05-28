@@ -29,7 +29,7 @@ jobs:
 
     - name: Run coverage
       run: |
-        poetry run pytest -cov=./bingogen --cov-report=xml
+        poetry run pytest --cov=./bingogen --cov-report=xml
         cat coverage.xml
 
     - name: Upload coverage reports to Codecov
