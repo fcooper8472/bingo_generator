@@ -1,4 +1,5 @@
 import pathlib
+import pytest
 import tempfile
 
 from bingogen.bingodata import BingoData
@@ -13,9 +14,8 @@ def test_bingo_data_init():
 def test_bingo_data_init_invalid_path():
     # This path should not exist
     invalid_file_path = '/path/to/invalid/file'
-    try:
+
+    with pytest.raises(AssertionError) as assertion_error:
         BingoData(invalid_file_path)
-    except AssertionError:
-        assert True
-    else:
-        assert False
+
+    assert str(assertion_error.value) == 'file /path/to/invalid/file does not exist'
