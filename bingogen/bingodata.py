@@ -11,6 +11,7 @@ class BingoData:
 
         self._check_file()
         self._read_file()
+        self._check_data()
 
     def _check_file(self):
         if not self._file_path.exists():
@@ -22,6 +23,10 @@ class BingoData:
                 stripped_line = line.strip()
                 if stripped_line:
                     self._data.append(stripped_line)
+
+    def _check_data(self):
+        if not self._data:
+            raise ValueError(f'no data found in {self._file_path}')
 
     @property
     def data(self):

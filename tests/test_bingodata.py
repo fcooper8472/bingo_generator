@@ -42,3 +42,13 @@ def test_bingo_data_five_items_with_empty_line():
     assert bingo_data.num_data_items == 5
     assert bingo_data.data[2] == 'Item 3'
     assert bingo_data.data[3] == 'Item 4'
+
+
+def test_bingo_data_no_items():
+
+    data_file_path = get_data_dir() / 'no_items.txt'
+
+    with pytest.raises(ValueError) as error:
+        BingoData(data_file_path)
+
+    assert 'no data found in' in str(error.value)
