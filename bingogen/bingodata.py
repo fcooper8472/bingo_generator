@@ -1,4 +1,8 @@
 import pathlib
+import random
+import warnings
+
+from typing import List
 
 
 class BingoData:
@@ -28,10 +32,19 @@ class BingoData:
         if not self._data:
             raise ValueError(f'no data found in {self._file_path}')
 
+        for line in self._data:
+            if len(line) > 50:
+                warnings.warn(f'text "{line}" is longer than 50 characters and might not format nicely')
+
     @property
-    def data(self):
+    def data(self) -> List[str]:
         return self._data
 
     @property
-    def num_data_items(self):
+    def num_data_items(self) -> int:
         return len(self._data)
+
+    def get_random_n(self, n: int) -> List[str]:
+        if n > self.num_data_items:
+            raise ValueError(f'requested a sample of size {n}, but there are only {self.num_data_items} entries')
+        return random.sample(self._data, n)

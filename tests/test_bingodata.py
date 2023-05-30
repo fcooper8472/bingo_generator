@@ -52,3 +52,45 @@ def test_bingo_data_no_items():
         BingoData(data_file_path)
 
     assert 'no data found in' in str(error.value)
+
+
+def test_long_lines():
+
+    data_file_path = get_data_dir() / 'long_lines.txt'
+
+    with pytest.warns(UserWarning) as record_of_warnings:
+        BingoData(data_file_path)
+
+    assert len(record_of_warnings) == 2
+
+    for warning in record_of_warnings:
+        assert 'is longer than 50 characters and might not format nicely' in str(warning.message)
+
+
+def test_sample_too_big():
+
+    data_file_path = get_data_dir() / 'five_items_with_empty_line.txt'
+    bingo_data = BingoData(data_file_path)
+
+    with pytest.raises(ValueError) as error:
+        bingo_data.get_random_n(7)
+
+    assert 'requested a sample of size 7, but there are only 5 entries' in str(error.value)
+
+
+def test_longer_input():
+
+    data_file_path = get_data_dir() / 'longer_input.txt'
+
+    bingo_data = BingoData(data_file_path)
+    assert bingo_data.num_data_items == 34
+
+    list_of_8 = bingo_data.get_random_n(8)
+    assert len(list_of_8) == 8
+    for item in list_of_8:
+        assert item in bingo_data.data
+
+    list_of_22 = bingo_data.get_random_n(22)
+    assert len(list_of_22) == 22
+    for item in list_of_22:
+        assert item in bingo_data.data

@@ -1,0 +1,4 @@
+This is a sample line of placeholder text with more than fifty characters
+Here's a line with thirty to forty-nine chars
+Again, we return to a line that comfortably exceeds the fifty-character limit
+And, a final shorter line for good measure
